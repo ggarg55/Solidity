@@ -1,0 +1,16 @@
+pragma solidity ^0.4.23;
+
+contract ERCToken {
+    mapping(address => uint) public balcancOf;
+    constructor (uint initialSupply) public {
+        balcancOf[msg.sender] = initialSupply;
+    }
+    
+    function tranfer(address _to, uint _value) public payable returns(bool success){
+        require(balcancOf[msg.sender] >= _value);
+        require(balcancOf[_to] + _value > balcancOf[_to]);
+        balcancOf[msg.sender] -= _value;
+        balcancOf[_to] += _value;
+        return true;
+    }
+}
